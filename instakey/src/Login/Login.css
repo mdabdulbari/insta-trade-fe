@@ -1,0 +1,18 @@
+.register-text:hover {
+    text-decoration: transparent;
+}
+
+.login-text {
+    align-content: center;
+    padding-left: 17%;
+}
+
+.email-text {
+    padding-right: 19%;
+}
+
+.login-content{
+    width: 350px;
+    margin-top: 130px;
+    margin-left: 300px;
+}
