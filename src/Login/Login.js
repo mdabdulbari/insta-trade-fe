@@ -8,11 +8,10 @@ class Login extends React.Component {
 
     constructor() {
         super();
-    
         this.handleChange = this.handleChange.bind(this);
     
         this.state = {
-          value: ''
+          password: ''
         };
       }
     
@@ -27,7 +26,7 @@ class Login extends React.Component {
       }
     
       handleChange(e) {
-        this.setState({ value: e.target.value });
+        this.setState({ password: e.target.value });
       }
     
       render() {
@@ -49,7 +48,7 @@ class Login extends React.Component {
                             <B.FormControl type="password" placeholder="Password" />
                             </B.Col>
                         </B.FormGroup>
-                        <Link to="/register" className="register-text">Don't have an account? Register</Link>
+                        <Link to="/register" className="register-text">Don't have an account? Register here.</Link>
                         <B.FormGroup>
                             <B.Col smOffset={0} sm={10}>
                             <B.Checkbox>Remember me</B.Checkbox>
@@ -58,7 +57,7 @@ class Login extends React.Component {
 
                         <B.FormGroup>
                             <B.Col smOffset={0} sm={10}>
-                            <B.Button bsStyle="primary">Sign in</B.Button>
+                            <B.Button href="/dashboard" bsStyle="primary">Sign in</B.Button>
                             </B.Col>
                         </B.FormGroup>
                     </B.Form>

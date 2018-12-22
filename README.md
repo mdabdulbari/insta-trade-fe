@@ -1,3 +1,0 @@
-# instatrade
-
-Insta Trade!!!

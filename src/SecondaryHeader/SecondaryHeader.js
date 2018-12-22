@@ -3,8 +3,6 @@ import * as B from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import "./SecondaryHeader.css";
 
-
-
 const SecondaryHeader = () => {
     return (
         <div className="App">
@@ -14,7 +12,7 @@ const SecondaryHeader = () => {
                 </B.Navbar.Brand>
                 <B.Nav pullRight>
                     <div class="login-button">
-                        <B.Button bsStyle="primary">Sign In</B.Button>
+                        <Link to="/login"><B.Button bsStyle="primary">Sign In</B.Button></Link>
                     </div>
                 </B.Nav>
             </B.Navbar>

@@ -8,7 +8,7 @@ const Home = () => {
         <div>
         <SecondaryHeader />
             <div className="topmargin">
-                <Link to="/login">Sign In</Link>
+                <h3>Welcome to Insta Trade!!!</h3>
             </div>
         </div>
     );

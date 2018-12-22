@@ -3,8 +3,6 @@ import * as B from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-
-
 const Header = () => {
     return (
         <div className="App">
@@ -15,7 +13,6 @@ const Header = () => {
                 <B.Nav pullRight>
                     <B.NavDropdown
                         bsStyle="success"
-                        title="Abdul Bari"
                         >   
                             <B.MenuItem eventKey="1">
                                 <Link to="/profile" className="dropdown-item">My Profile</Link>

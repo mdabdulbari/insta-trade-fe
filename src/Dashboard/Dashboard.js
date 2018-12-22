@@ -18,12 +18,14 @@ class Dashboard extends React.Component{
         this.callApi()
             .then(content => {
                 this.setState({ posts: content, loading: false})
-                console.log("content received");
+            })
+            .catch(error => {
+                console.log(error);
             })
     }
     
     async callApi(){
-        const response = await fetch('http://localhost:8080/dashboard');
+        const response = await fetch('http://localhost:8080/posts');
         return await response.json();
     }
 
