@@ -11,9 +11,7 @@ const SecondaryHeader = () => {
                     <Link to="/login">Insta Trade</Link>
                 </B.Navbar.Brand>
                 <B.Nav pullRight>
-                    <div class="login-button">
-                        <Link to="/login"><B.Button bsStyle="primary">Sign In</B.Button></Link>
-                    </div>
+                    
                 </B.Nav>
             </B.Navbar>
         </div>

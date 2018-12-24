@@ -2,17 +2,22 @@ import React from "react";
 import "./Login.css";
 import * as B from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import SecondaryHeader from "../SecondaryHeader/SecondaryHeader";
 
 class Login extends React.Component {
 
     constructor() {
         super();
-        this.handleChange = this.handleChange.bind(this);
     
         this.state = {
-          password: ''
+          email: '',
+          password: '',
+          isLoggedIn: false
         };
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.authenticate = this.authenticate.bind(this);
       }
     
       getValidationState(type) {
@@ -25,11 +30,28 @@ class Login extends React.Component {
         }
       }
     
-      handleChange(e) {
+      handleEmailChange(e) {
+        this.setState({ email: e.target.value });
+      }
+
+      handlePasswordChange(e) {
         this.setState({ password: e.target.value });
+      }
+
+      async callApi(){
+        const response = await fetch('http://localhost:8080/login');
+        return await response.json();
+      }
+
+      authenticate() {
+        const { email, password } = this.state;
+        if (email === "addubari@gmail.com" && password === "password") {
+            this.setState({ isLoggedIn: true });
+        }
       }
     
       render() {
+        const { isLoggedIn } = this.state;
         return (
             <div>
             <SecondaryHeader />
@@ -39,13 +61,13 @@ class Login extends React.Component {
                     <B.Form horizontal>
                         <B.FormGroup controlId="formHorizontalEmail">
                             <B.Col sm={10}>
-                            <B.FormControl type="email" placeholder="Email" />
+                                <B.FormControl onChange={this.handleEmailChange} type="email" placeholder="Email" />
                             </B.Col>
                         </B.FormGroup>
 
                         <B.FormGroup controlId="formHorizontalPassword">
                             <B.Col sm={10}>
-                            <B.FormControl type="password" placeholder="Password" />
+                                <B.FormControl onChange={this.handlePasswordChange} type="password" placeholder="Password" />
                             </B.Col>
                         </B.FormGroup>
                         <Link to="/register" className="register-text">Don't have an account? Register here.</Link>
@@ -57,11 +79,12 @@ class Login extends React.Component {
 
                         <B.FormGroup>
                             <B.Col smOffset={0} sm={10}>
-                            <B.Button href="/dashboard" bsStyle="primary">Sign in</B.Button>
+                                <B.Button onClick={this.authenticate} bsStyle="primary">Sign in</B.Button>
                             </B.Col>
                         </B.FormGroup>
                     </B.Form>
                 </div>
+                {isLoggedIn ? <Redirect to="/dashboard" /> : <div />}
             </div>
         );
       }
