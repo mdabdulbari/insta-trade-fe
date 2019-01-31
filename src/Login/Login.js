@@ -1,8 +1,8 @@
 import React from 'react';
 import './Login.css';
 import * as B from 'bootstrap';
-import {Link} from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import SecondaryHeader from '../SecondaryHeader/SecondaryHeader';
 
 class Login extends React.Component {
@@ -24,17 +24,17 @@ class Login extends React.Component {
     if (type === 'password') {
       const length = given_string.length;
       if (length > 8) return 'success';
-      else if (length > 0) return 'error';
+      if (length > 0) return 'error';
       return null;
     }
   }
 
   handleEmailChange(e) {
-    this.setState({email: e.target.value});
+    this.setState({ email: e.target.value });
   }
 
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    this.setState({ password: e.target.value });
   }
 
   async callApi() {
@@ -43,14 +43,14 @@ class Login extends React.Component {
   }
 
   authenticate() {
-    const {email, password} = this.state;
+    const { email, password } = this.state;
     if (email === 'addubari@gmail.com' && password === 'password') {
-      this.setState({isLoggedIn: true});
+      this.setState({ isLoggedIn: true });
     }
   }
 
   render() {
-    const {isLoggedIn} = this.state;
+    const { isLoggedIn } = this.state;
     return (
       <div>
         <SecondaryHeader />

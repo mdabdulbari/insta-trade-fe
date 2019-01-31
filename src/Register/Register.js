@@ -1,7 +1,7 @@
 import React from 'react';
 import './Register.css';
 import * as B from 'bootstrap';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import SecondaryHeader from '../SecondaryHeader/SecondaryHeader';
 
 class Register extends React.Component {
@@ -17,39 +17,40 @@ class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
-      confirm_password: '',
+      confirmPassword: '',
       emailValidationState: '',
       passwordValidationState: '',
       confirmPasswordValidationState: '',
       isRegistered: false,
     };
   }
+
   getValidationStateForEmail() {
-    const given_string = this.state.email;
-    if (given_string.indexOf('@') > -1) {
-      this.setState({emailValidationState: 'success'});
+    const { email } = this.state;
+    if (email.indexOf('@') > -1) {
+      this.setState({ emailValidationState: 'success' });
     } else {
-      this.setState({emailValidationState: 'error'});
+      this.setState({ emailValidationState: 'error' });
     }
   }
 
   getValidationStateForPassword() {
-    const given_string = this.state.password;
-    const length = given_string.length;
+    const { password } = this.state;
+    const { length } = password;
     if (length > 7) {
-      this.setState({passwordValidationState: 'success'});
+      this.setState({ passwordValidationState: 'success' });
     } else {
-      this.setState({passwordValidationState: 'error'});
+      this.setState({ passwordValidationState: 'error' });
     }
   }
 
   getValidationStateForConfirmPassword() {
-    const password = this.state.password;
-    const confirm_password = this.state.confirm_password;
-    if (password === confirm_password && confirm_password.length > 0) {
-      this.setState({confirmPasswordValidationState: 'success'});
+    const { password } = this.state;
+    const { confirmPassword } = this.state;
+    if (password === confirmPassword && confirmPassword.length > 0) {
+      this.setState({ confirmPasswordValidationState: 'success' });
     } else {
-      this.setState({confirmPasswordValidationState: 'error'});
+      this.setState({ confirmPasswordValidationState: 'error' });
     }
   }
 
@@ -62,11 +63,11 @@ class Register extends React.Component {
     }
   }
 
-  callAPI(content, callback) {
+  callAPI = (content, callback) => {
     const Http = new XMLHttpRequest();
     const url = 'http://localhost:8080/register';
     Http.open('POST', url);
-    Http.onreadystatechange = function() {
+    Http.onreadystatechange = function () {
       if (Http.readyState === XMLHttpRequest.DONE) {
         callback(Http.response);
       }
@@ -80,15 +81,18 @@ class Register extends React.Component {
       this.setState({
         isRegistered: true,
       });
-    };
+    }
   }
 
   register() {
-    const {email, password, emailValidationState, passwordValidationState, confirmPasswordValidationState} = this.state;
+    const {
+      email, password, emailValidationState,
+      passwordValidationState, confirmPasswordValidationState,
+    } = this.state;
     if (emailValidationState === 'success'
-            && passwordValidationState === 'success'
-            && confirmPasswordValidationState === 'success') {
-      const jsonBody = JSON.stringify({'email': email, 'password': password});
+      && passwordValidationState === 'success'
+      && confirmPasswordValidationState === 'success') {
+      const jsonBody = JSON.stringify({ email, password });
       this.callAPI(jsonBody, this.changeRegistrationStatus);
     }
     this.getValidationState('email');
@@ -96,37 +100,39 @@ class Register extends React.Component {
   }
 
   handleEmailChange(e) {
-    this.setState({email: e.target.value},
-        () => this.getValidationState('email')
-    );
+    this.setState({ email: e.target.value },
+      () => this.getValidationState('email'));
   }
 
   handlePasswordChange(e) {
-    this.setState({password: e.target.value},
-        () => this.getValidationState('password')
-    );
+    this.setState({ password: e.target.value },
+      () => this.getValidationState('password'));
   }
+
   handleConfirmPasswordChange(e) {
-    this.setState({confirm_password: e.target.value},
-        () => this.getValidationState('confirm_password')
-    );
+    this.setState({ confirmPassword: e.target.value },
+      () => this.getValidationState('confirmPassword'));
   }
 
   render() {
+    const {
+      emailValidationState, value, passwordValidationState,
+      confirmPasswordValidationState, isRegistered,
+    } = this.state;
     return (
       <div>
         <SecondaryHeader />
         <div className="register-content">
-          <h2 class="register-heading">Register</h2>
+          <h2 className="register-heading">Register</h2>
           <br />
           <form className="form-register">
             <B.FormGroup
               controlId="formBasicText"
-              validationState={this.state.emailValidationState}
+              validationState={emailValidationState}
             >
               <B.FormControl
                 type="text"
-                value={this.state.value}
+                value={value}
                 placeholder="Email"
                 onChange={this.handleEmailChange}
               />
@@ -136,11 +142,11 @@ class Register extends React.Component {
           <form>
             <B.FormGroup
               controlId="formBasicText"
-              validationState={this.state.passwordValidationState}
+              validationState={passwordValidationState}
             >
               <B.FormControl
                 type="password"
-                value={this.state.value}
+                value={value}
                 placeholder="Password"
                 onChange={this.handlePasswordChange}
               />
@@ -151,11 +157,11 @@ class Register extends React.Component {
           <form>
             <B.FormGroup
               controlId="formBasicText"
-              validationState={this.state.confirmPasswordValidationState}
+              validationState={confirmPasswordValidationState}
             >
               <B.FormControl
                 type="password"
-                value={this.state.value}
+                value={value}
                 placeholder="Confirm Password"
                 onChange={this.handleConfirmPasswordChange}
               />
@@ -167,9 +173,10 @@ class Register extends React.Component {
             bsStyle="primary"
             onClick={this.register}
           >
-                        Register</B.Button>
+            Register
+          </B.Button>
         </div>
-        {this.state.isRegistered ? <Redirect to="/login" /> : <div />}
+        {isRegistered ? <Redirect to="/login" /> : <div />}
       </div>
     );
   }

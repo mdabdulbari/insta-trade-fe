@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Dashboard from './Dashboard/Dashboard';
@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          {/* <Switch> */}
+          <Switch>
             <Route path="/" component={Home} exact />
             {/* <Route path="/dashboard" component={Dashboard} exact />
             <Route path="/profile" component={Profile} exact />
@@ -23,7 +23,7 @@ class App extends Component {
             <Route path="/contactus" component={ContactUs} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/register" component={Register} /> */}
-          {/* </Switch> */}
+          </Switch>
         </div>
       </BrowserRouter>
     );

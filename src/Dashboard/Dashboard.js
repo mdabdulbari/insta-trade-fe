@@ -13,15 +13,15 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({loading: true});
+    this.setState({ loading: true });
     this.callApi()
-        .then((content) => {
-          console.log(content);
-          this.setState({posts: content, loading: false});
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .then((content) => {
+        console.log(content);
+        this.setState({ posts: content, loading: false });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async callApi() {
