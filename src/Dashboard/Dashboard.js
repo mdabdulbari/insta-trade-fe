@@ -16,7 +16,6 @@ class Dashboard extends React.Component {
     this.setState({ loading: true });
     this.callApi()
       .then((content) => {
-        console.log(content);
         this.setState({ posts: content, loading: false });
       })
       .catch((error) => {
@@ -24,15 +23,16 @@ class Dashboard extends React.Component {
       });
   }
 
-  async callApi() {
-    const response = await fetch('http://localhost:8080/posts');
+  callApi = () => {
+    const response = fetch('http://localhost:8080/posts');
     console.log(response);
     console.log(response.json);
-    return await response.json();
+    return response.json();
   }
 
   render() {
-    if (this.state.loading) {
+    const { loading, posts } = this.state;
+    if (loading) {
       return (
         <div className="loading-div">
           <Loading />
@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
       <div>
         <Header />
         <div className="topmargin">
-          {this.state.posts[0].content}
+          {posts[0].content}
         </div>
       </div>
     );
