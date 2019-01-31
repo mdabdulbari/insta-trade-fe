@@ -1,8 +1,7 @@
 import React from 'react';
 import './Login.css';
 import * as B from 'bootstrap';
-import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import SecondaryHeader from '../SecondaryHeader/SecondaryHeader';
 
 class Login extends React.Component {
@@ -20,13 +19,18 @@ class Login extends React.Component {
   }
 
   getValidationState(type) {
-    const given_string = this.state.value;
+    const value = this.state;
     if (type === 'password') {
-      const length = given_string.length;
+      const { length } = value;
       if (length > 8) return 'success';
       if (length > 0) return 'error';
-      return null;
     }
+    return null;
+  }
+
+  callApi = () => {
+    const response = fetch('http://localhost:8080/login');
+    return response.json();
   }
 
   handleEmailChange(e) {
@@ -35,11 +39,6 @@ class Login extends React.Component {
 
   handlePasswordChange(e) {
     this.setState({ password: e.target.value });
-  }
-
-  async callApi() {
-    const response = await fetch('http://localhost:8080/login');
-    return await response.json();
   }
 
   authenticate() {
@@ -69,7 +68,7 @@ class Login extends React.Component {
                 <B.FormControl onChange={this.handlePasswordChange} type="password" placeholder="Password" />
               </B.Col>
             </B.FormGroup>
-            <Link to="/register" className="register-text">Don't have an account? Register here.</Link>
+            <Link to="/register" className="register-text">Don&apos;t have an account? Register here.</Link>
             <B.FormGroup>
               <B.Col smOffset={0} sm={10}>
                 <B.Checkbox>Remember me</B.Checkbox>

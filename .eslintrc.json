@@ -7,6 +7,7 @@
     "globals": {
         "document": true,
         "window": true,
-        "XMLHttpRequest": true
+        "XMLHttpRequest": true,
+        "fetch": true
       }
 }
